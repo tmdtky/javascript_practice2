@@ -1,6 +1,6 @@
 'use strict';
 {
-  // 追加ボタンクリック時に実行されるイベントリスナーを登録
+  // 追加ボタンクリック時に新規タスクを追加
   document.getElementById('add-button').addEventListener('click', function () {
     // 新規タスクの追加
     const newTask = document.getElementById('new-task');
@@ -25,9 +25,10 @@
     // 新規タスクの追加
     addTodo() {
       // 入力値バリデーション
-      const newTask = document.getElementById('new-task');
-      if (newTask === '' || newTask === 'タスクを入力して下さい') {
-        document.getElementById('new-task').value = "タスクを入力して下さい";
+      let newTask = document.getElementById('new-task');
+      if (newTask.value === '' || newTask.value === 'タスクを入力して下さい') {
+        newTask.value = "タスクを入力して下さい";
+        return;
       }
 
       // 新しいタスクの追加
@@ -64,7 +65,7 @@
 
       // 削除ボタン押下時にのイベントリスナーを登録
       // 親要素の親要素であるtrタグを削除
-      deleteButton.addEventListener('click', () => {
+      deleteButton.addEventListener('click', function () {
         const tbl = document.getElementById('tbl');
         tbl.removeChild(deleteButton.parentNode.parentNode);
         this.counter--;
