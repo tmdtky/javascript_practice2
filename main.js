@@ -19,15 +19,17 @@
     const row = tbl.insertRow(Todo.counter);
     const cellId = row.insertCell(0);
     const cellComment = row.insertCell(1);
-    const cellStatus = row.insertCell(2);
+    const cellStatus1 = row.insertCell(2);
+    const cellStatus2 = row.insertCell(3);
 
     const status = ['作業中', '削除'];
-    const todo = new Todo(Todo.counter, newTask, status)
+    const todo = new Todo(Todo.counter, newTask, status);
     cellId.textContent = Todo.counter;
     cellComment.textContent = todo.comment;
-    todo.addInWorkButton(cellStatus);
-    Todo.counter++;
+    todo.addInWorkButton(cellStatus1);
+    todo.addDeleteButton(cellStatus2);
 
+    Todo.counter++;
     document.getElementById('new-task').value = '';
   }
 
@@ -72,6 +74,14 @@
       inWorkButton.textContent = '作業中';
       inWorkButton.id = 'inwork-button';
       cell.appendChild(inWorkButton);
+    }
+
+    // 「削除」ボタンを追加
+    addDeleteButton(cell) {
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = '削除';
+      deleteButton.id = 'delete-button';
+      cell.appendChild(deleteButton);
     }
   }
 
