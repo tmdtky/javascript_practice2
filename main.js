@@ -21,11 +21,11 @@
     const cellComment = row.insertCell(1);
     const cellStatus = row.insertCell(2);
 
-    const status = '作業中';
+    const status = ['作業中', '削除'];
     const todo = new Todo(Todo.counter, newTask, status)
     cellId.textContent = Todo.counter;
     cellComment.textContent = todo.comment;
-    cellStatus.textContent = todo.status;
+    todo.addInWorkButton(cellStatus);
     Todo.counter++;
 
     document.getElementById('new-task').value = '';
@@ -64,6 +64,14 @@
 
     set status(status) {
       this._status = status;
+    }
+
+    // 「作業中」ボタンを追加
+    addInWorkButton(cell) {
+      const inWorkButton = document.createElement('button');
+      inWorkButton.textContent = '作業中';
+      inWorkButton.id = 'inwork-button';
+      cell.appendChild(inWorkButton);
     }
   }
 
