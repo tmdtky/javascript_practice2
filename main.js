@@ -44,31 +44,7 @@
       this._status = status;
     }
 
-    get id() {
-      return this._id;
-    }
-
-    set id(id) {
-      this._id = id;
-    }
-
-    get comment() {
-      return this._comment;
-    }
-
-    set comment(comment) {
-      this._comment = comment;
-    }
-
-    get status() {
-      return this._status;
-    }
-
-    set status(status) {
-      this._status = status;
-    }
-
-    // 「作業中」ボタンを追加
+    // 作業中ボタンを追加
     addInWorkButton(cell) {
       const inWorkButton = document.createElement('button');
       inWorkButton.textContent = '作業中';
@@ -76,12 +52,50 @@
       cell.appendChild(inWorkButton);
     }
 
-    // 「削除」ボタンを追加
+    // 削除ボタンを追加
     addDeleteButton(cell) {
       const deleteButton = document.createElement('button');
       deleteButton.textContent = '削除';
       deleteButton.id = 'delete-button';
       cell.appendChild(deleteButton);
+
+      // 削除ボタン押下時にのイベントリスナーを登録
+      // 親要素の親要素であるtrタグを削除
+      deleteButton.addEventListener('click', () => {
+        const tbl = document.getElementById('tbl');
+        tbl.removeChild(deleteButton.parentNode.parentNode);
+        this.counter--;
+      });
+    }
+
+    // idのgetter
+    get id() {
+      return this._id;
+    }
+
+    // idのsetter
+    set id(id) {
+      this._id = id;
+    }
+
+    // commentのgetter
+    get comment() {
+      return this._comment;
+    }
+
+    // commentのsetter
+    set comment(comment) {
+      this._comment = comment;
+    }
+
+    // statusのgetter
+    get status() {
+      return this._status;
+    }
+
+    // statusのsetter
+    set status(status) {
+      this._status = status;
     }
   }
 
