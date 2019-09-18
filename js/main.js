@@ -1,13 +1,21 @@
 'use strict';
 {
-  // 追加ボタンクリック時に新規タスクを追加
-  document.getElementById('add-button').addEventListener('click', function () {
-    // 新規タスクの追加
-    const newTask = document.getElementById('new-task');
-    const status = ['作業中', '削除'];
-    const todo = new Todo(Todo.counter, newTask.value, status);
-    todo.addTodo();
-  });
+  // Mainクラス
+  class Main {
+    static main() {
+      // 追加ボタンクリック時に新規タスクを追加
+      document.getElementById('add-button').addEventListener('click', function () {
+        // 新規タスクの追加
+        const newTask = document.getElementById('new-task');
+        const status = ['作業中', '削除'];
+        const todo = new Todo(Todo.counter, newTask.value, status);
+        todo.addTodo();
+      });
+    }
+  }
+
+  // mainメソッドの実行
+  Main.main();
 
   // ToDoクラス
   class Todo {
@@ -109,5 +117,4 @@
     inWork: 1,
     delete: 2
   }
-
 }
