@@ -2,46 +2,49 @@
 {
   // 追加ボタンクリック時に実行されるイベントリスナーを登録
   document.getElementById('add-button').addEventListener('click', function () {
-    const newTask = document.getElementById('new-task').value;
-
-    // 入力値バリデーション
-    if (newTask === '' || newTask === 'タスクを入力して下さい') {
-      document.getElementById('new-task').value = "タスクを入力して下さい";
-    }
-
-    // 新しいタスクの追加
-    addTableRow(newTask);
-  });
-
-  // 新しいタスクを追加する関数
-  function addTableRow(newTask) {
-    const tbl = document.getElementById('tbl');
-    const row = tbl.insertRow(Todo.counter);
-    const cellId = row.insertCell(0);
-    const cellComment = row.insertCell(1);
-    const cellStatus1 = row.insertCell(2);
-    const cellStatus2 = row.insertCell(3);
-
+    // 新規タスクの追加
+    const newTask = document.getElementById('new-task');
     const status = ['作業中', '削除'];
-    const todo = new Todo(Todo.counter, newTask, status);
-    cellId.textContent = Todo.counter;
-    cellComment.textContent = todo.comment;
-    todo.addInWorkButton(cellStatus1);
-    todo.addDeleteButton(cellStatus2);
-
-    Todo.counter++;
-    document.getElementById('new-task').value = '';
-  }
+    const todo = new Todo(Todo.counter, newTask.value, status);
+    todo.addTodo();
+  });
 
   // ToDoクラス
   class Todo {
 
+    // ToDoのカウンタ
     static counter = 0;
 
+    // コンストラクタ
     constructor(id, comment, status) {
       this._id = id;
       this._comment = comment;
       this._status = status;
+    }
+
+    // 新規タスクの追加
+    addTodo() {
+      // 入力値バリデーション
+      const newTask = document.getElementById('new-task');
+      if (newTask === '' || newTask === 'タスクを入力して下さい') {
+        document.getElementById('new-task').value = "タスクを入力して下さい";
+      }
+
+      // 新しいタスクの追加
+      const tbl = document.getElementById('tbl');
+      const row = tbl.insertRow(this.counter);
+      const cellId = row.insertCell(0);
+      const cellComment = row.insertCell(1);
+      const cellStatus1 = row.insertCell(2);
+      const cellStatus2 = row.insertCell(3);
+
+      cellId.textContent = Todo.counter;
+      cellComment.textContent = this.comment;
+      this.addInWorkButton(cellStatus1);
+      this.addDeleteButton(cellStatus2);
+
+      Todo.counter++;
+      newTask.value = '';
     }
 
     // 作業中ボタンを追加
