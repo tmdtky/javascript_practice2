@@ -61,6 +61,14 @@ class Todo {
     inWorkButton.textContent = '作業中';
     inWorkButton.id = 'inwork-button';
     cell.appendChild(inWorkButton);
+
+    // 作業中ボタン押下時にのイベントリスナーを登録
+    // 親要素の親要素であるtrタグを削除
+    inWorkButton.addEventListener('click', function () {
+      if (inWorkButton.textContent === '作業中') {
+        inWorkButton.textContent = '完了';
+      }
+    });
   }
 
   // 削除ボタンを追加
